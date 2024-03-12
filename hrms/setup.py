@@ -37,8 +37,6 @@ def get_custom_fields():
 				"fieldtype": "Link",
 				"ignore_user_permissions": 1,
 				"label": "Employment Type",
-				"oldfieldname": "employment_type",
-				"oldfieldtype": "Link",
 				"options": "Employment Type",
 				"insert_after": "department",
 			},
@@ -304,7 +302,6 @@ def get_custom_fields():
 		"Loan Repayment": [
 			{
 				"default": "0",
-				"fetch_from": "against_loan.repay_from_salary",
 				"fieldname": "repay_from_salary",
 				"fieldtype": "Check",
 				"label": "Repay From Salary",
@@ -317,7 +314,16 @@ def get_custom_fields():
 				"label": "Payroll Payable Account",
 				"mandatory_depends_on": "eval:doc.repay_from_salary",
 				"options": "Account",
-				"insert_after": "rate_of_interest",
+				"insert_after": "payment_account",
+			},
+			{
+				"default": "0",
+				"depends_on": 'eval:doc.applicant_type=="Employee"',
+				"fieldname": "process_payroll_accounting_entry_based_on_employee",
+				"hidden": 1,
+				"fieldtype": "Check",
+				"label": "Process Payroll Accounting Entry based on Employee",
+				"insert_after": "repay_from_salary",
 			},
 		],
 	}
